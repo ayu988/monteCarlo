@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <script src='https://cdn.plot.ly/plotly-2.4.2.min.js'></script>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/try.css">
+    <title>Document</title>
+    <style>
+        #graph{
+            width: 700px;
+            height: 700px;
+        }
+    </style>
+</head>
+<body>
+    <input type="submit" value="" id="maroHit">
+    <div id="graph"></div>
+    <script>
+        const sub = document.getElementById("maroHit")
+        sub.addEventListener("click", () => {
+            const para = 1000;
+        })
+        const interval = []
+        const piData = []
+        const iter = 1000;
+        var pin = 0
+        var pout = 0
+        var pi = 0
+        var ptot = 0
+        for (let i=1;i<=100;i++){
+            interval.push(i);
+            for (let u = 1; u <= iter; u++) {
+                let x = Math.random();
+                let y = Math.random();
+                if (Math.sqrt(x * x + y * y) <= 1) {
+                    pin = pin + 1
+                    // console.log(pin,"pin")
+                }
+                ptot = ptot + 1
+            }
+            var q = 4 * (pin / ptot)
+            piData.push(q.toFixed(4))
+        }
+        var trace = {
+            x: piData,
+            y: interval,
+            type: 'scatter',
+            name: 'Estimated pi',
+            mode: 'markers'
+        }
+        var layout = {
+            autosize: true,
+            title: '',
+            xaxis: {
+                title: ''
+            },
+            yaxis: {
+                title: '',
+            }
+        };
+
+        console.log(piData)
+        Plotly.newPlot("graph", [trace], layout)
+    </script>
+</body>
+
+</html>
