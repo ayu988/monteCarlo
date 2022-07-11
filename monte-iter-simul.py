@@ -17,10 +17,11 @@ for i in range(len(iter)):
         for j in range(simul):  # points for simulation
             x = random.uniform(-1, 1)
             y = random.uniform(-1, 1)
-            if (x**2 + y**2) <= 1:
+            z = random.uniform(-1,1)
+            if (x**2 + y**2 + z**2) <= 1:
                 pin += 1
             ptot += 1
-        pi = 4 * (pin / ptot)
+        pi = 6 * (pin / ptot)
         temp.append(pi)
     bigData.append(temp)
 
@@ -48,8 +49,8 @@ for i in range(len(iter)):
     var.append(df[str(iter[i])].var())
     skew.append(df[str(iter[i])].skew())
     kurt.append(df[str(iter[i])].kurtosis())
-    sns.displot(data=df,x=str(iter[i]),kind="kde")
-    # df.to_csv(str(iter[i])+".csv")
+    sns.displot(data=df,x=str(iter[i]),kde=True)
+    df.to_csv(str(iter[i])+".csv")
     del df
 stats_data["min"] = min
 stats_data["max"] = max
@@ -60,7 +61,6 @@ stats_data["variance"] = var
 stats_data["skewness"] = skew
 stats_data["kurtosis"] = kurt
 print(stats_data)
-# stats_data.to_csv("stats.csv")
+stats_data.to_csv("stats.csv")
 plt.show()
 sam = bigData[0]
-
